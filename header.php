@@ -25,7 +25,9 @@
 		<a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'twentyseventeen' ); ?></a>
 
 		<header id="masthead" class="site-header" role="banner">
-
+			<div class="site-branding">
+				<a href="<?php bloginfo('url'); ?>" class="logo"><span class="light">b</span><span class="heavy">w</span></a>
+			</div>
 		</header><!-- #masthead -->
 		
 		<div id="content" class="site-content">

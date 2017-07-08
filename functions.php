@@ -173,56 +173,21 @@ function brettwysocki_setup() {
 add_action( 'after_setup_theme', 'brettwysocki_setup' );
 
 /**
- * Set the content width in pixels, based on the theme's design and stylesheet.
- *
- * Priority 0 to make it available to lower priority callbacks.
- *
- * @global int $content_width
- */
-function brettwysocki_content_width() {
-
-	$content_width = 700;
-
-	if ( brettwysocki_is_frontpage() ) {
-		$content_width = 1120;
-	}
-
-	/**
-	 * Filter Twenty Seventeen content width of the theme.
-	 *
-	 * @since Twenty Seventeen 1.0
-	 *
-	 * @param $content_width integer
-	 */
-	$GLOBALS['content_width'] = apply_filters( 'brettwysocki_content_width', $content_width );
-}
-add_action( 'after_setup_theme', 'brettwysocki_content_width', 0 );
-
-/**
  * Register custom fonts.
  */
 function brettwysocki_fonts_url() {
 	$fonts_url = '';
 
-	/**
-	 * Translators: If there are characters in your language that are not
-	 * supported by Libre Franklin, translate this to 'off'. Do not translate
-	 * into your own language.
-	 */
-	$libre_franklin = _x( 'on', 'Libre Franklin font: on or off', 'brettwysocki' );
+	$font_families = array();
 
-	if ( 'off' !== $libre_franklin ) {
-		$font_families = array();
+	$font_families[] = 'Signika:400,700';
 
-		$font_families[] = 'Libre Franklin:300,300i,400,400i,600,600i,800,800i';
+	$query_args = array(
+		'family' => urlencode( implode( '|', $font_families ) ),
+		'subset' => urlencode( 'latin,latin-ext' ),
+	);
 
-		$query_args = array(
-			'family' => urlencode( implode( '|', $font_families ) ),
-			'subset' => urlencode( 'latin,latin-ext' ),
-		);
-
-		$fonts_url = add_query_arg( $query_args, 'https://fonts.googleapis.com/css' );
-	}
+	$fonts_url = add_query_arg( $query_args, 'https://fonts.googleapis.com/css' );
 
 	return esc_url_raw( $fonts_url );
 }
@@ -253,7 +218,7 @@ add_filter( 'wp_resource_hints', 'brettwysocki_resource_hints', 10, 2 );
  *
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
  */
-function brettwysocki_widgets_init() {
+/*function brettwysocki_widgets_init() {
 	register_sidebar( array(
 		'name'          => __( 'Sidebar', 'brettwysocki' ),
 		'id'            => 'sidebar-1',
@@ -284,7 +249,7 @@ function brettwysocki_widgets_init() {
 		'after_title'   => '</h2>',
 	) );
 }
-add_action( 'widgets_init', 'brettwysocki_widgets_init' );
+add_action( 'widgets_init', 'brettwysocki_widgets_init' );*/
 
 /**
  * Replaces "[...]" (appended to automatically generated excerpts) with ... and
@@ -354,30 +319,21 @@ function brettwysocki_scripts() {
 	// Sometimes you need to be fancy.
 	wp_enqueue_style( 'brettwysocki-fonts', brettwysocki_fonts_url(), array(), null );
 
+	wp_enqueue_script( 'fontawesome-base', get_bloginfo('template_directory') . '/assets/js/fontawesome.js', array(), '5.0.0-alpha4' );
+
+	wp_enqueue_script( 'fontawesome-solid', get_bloginfo('template_directory') . '/assets/js/packs/solid.js', array('fontawesome-base'), '5.0.0-alpha4' );
+
 	// Gotta have style.
-	wp_enqueue_style( 'brettwysocki-style', get_stylesheet_uri() );
+	wp_enqueue_style( 'brettwysocki-style', get_stylesheet_uri(), array(),  filemtime( get_stylesheet_directory() . '/style.css' ) );
 
 	// Load the dark colorscheme.
 	if ( 'dark' === get_theme_mod( 'colorscheme', 'light' ) || is_customize_preview() ) {
 		wp_enqueue_style( 'brettwysocki-colors-dark', get_theme_file_uri( '/assets/css/colors-dark.css' ), array( 'brettwysocki-style' ), '1.0' );
 	}
 
-	wp_enqueue_script( 'brettwysocki-skip-link-focus-fix', get_theme_file_uri( '/assets/js/skip-link-focus-fix.js' ), array(), '1.0', true );
+	//wp_enqueue_script( 'brettwysocki-global', get_theme_file_uri( '/assets/js/global.js' ), array( 'jquery' ), '1.0', true );
 
-	$brettwysocki_l10n = array(
-		'quote'          => brettwysocki_get_svg( array( 'icon' => 'quote-right' ) ),
-	);
-
-	if ( has_nav_menu( 'top' ) ) {
-		wp_enqueue_script( 'brettwysocki-navigation', get_theme_file_uri( '/assets/js/navigation.js' ), array(), '1.0', true );
-		$brettwysocki_l10n['expand']         = __( 'Expand child menu', 'brettwysocki' );
-		$brettwysocki_l10n['collapse']       = __( 'Collapse child menu', 'brettwysocki' );
-		$brettwysocki_l10n['icon']           = brettwysocki_get_svg( array( 'icon' => 'angle-down', 'fallback' => true ) );
-	}
-
-	wp_enqueue_script( 'brettwysocki-global', get_theme_file_uri( '/assets/js/global.js' ), array( 'jquery' ), '1.0', true );
-
-	wp_enqueue_script( 'jquery-scrollto', get_theme_file_uri( '/assets/js/jquery.scrollTo.js' ), array( 'jquery' ), '2.1.2', true );
+	//wp_enqueue_script( 'jquery-scrollto', get_theme_file_uri( '/assets/js/jquery.scrollTo.js' ), array( 'jquery' ), '2.1.2', true );
 
 	wp_localize_script( 'brettwysocki-skip-link-focus-fix', 'brettwysockiScreenReaderText', $brettwysocki_l10n );
 
@@ -386,6 +342,20 @@ function brettwysocki_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'brettwysocki_scripts' );
+
+function brettwysocki_add_defer_attribute($tag, $handle) {
+   // add script handles to the array below
+   $scripts_to_defer = array('fontawesome-base', 'fontawesome-solid');
+   
+   foreach($scripts_to_defer as $defer_script) {
+      if ($defer_script === $handle) {
+         return str_replace(' src', ' defer="defer" src', $tag);
+      }
+   }
+   return $tag;
+}
+
+add_filter('script_loader_tag', 'brettwysocki_add_defer_attribute', 10, 2);
 
 /**
  * Add custom image sizes attribute to enhance responsive image functionality

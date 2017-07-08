@@ -16,6 +16,10 @@
 
 	</div><!-- #page -->
 
+	<div class="menu-toggle">
+		<a href="#"></a>
+	</div>
+
 	<?php wp_footer(); ?>
 
 </body>

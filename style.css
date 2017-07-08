@@ -33,4 +33,33 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
+html {
+  font-family: 'Signika';
+  font-size: 62.5%; }
+
+body {
+  font-size: 18px; }
+
+.site {
+  position: relative; }
+
+a {
+  color: darkred;
+  text-decoration: none; }
+  a:hover {
+    color: #580000; }
+
+.site-branding {
+  position: absolute;
+  top: 0;
+  left: 0; }
+  .site-branding .logo .light {
+    font-weight: 300; }
+  .site-branding .logo .heavy {
+    font-weight: 700; }
+
+.wrap {
+  max-width: 1200px;
+  margin: 0 auto; }
+
 /*# sourceMappingURL=style.css.map */

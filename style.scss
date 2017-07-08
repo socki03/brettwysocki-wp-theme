@@ -7,3 +7,41 @@
  */
 
  @import 'assets/scss/reset';
+
+html {
+	font-family: 'Signika';
+	font-size: 62.5%;
+}
+body {
+	font-size: 18px;
+}
+.site {
+	position: relative;
+}
+
+a {
+	color: darkred;
+	text-decoration: none;
+	&:hover {
+		color: darken( darkred, 10% );
+	}
+}
+
+ .site-branding {
+ 	position: absolute;
+ 	top: 0;
+ 	left: 0;
+ 	.logo {
+ 		.light {
+			font-weight: 300;
+ 		}
+ 		.heavy {
+ 			font-weight: 700;
+ 		}
+ 	}
+ }
+
+ .wrap {
+ 	max-width: 1200px;
+ 	margin: 0 auto;
+ }
