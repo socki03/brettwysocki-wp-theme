@@ -21,13 +21,20 @@
 <body <?php body_class(); ?>>
 
 	<div id="page" class="site">
-		
-		<a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'twentyseventeen' ); ?></a>
 
 		<header id="masthead" class="site-header" role="banner">
 			<div class="site-branding">
-				<a href="<?php bloginfo('url'); ?>" class="logo"><span class="light">b</span><span class="heavy">w</span></a>
+				<a href="<?php bloginfo('url'); ?>" class="logo"><span class="heavy">brett</span><br /><span class="light">wysocki</span></a>
 			</div>
 		</header><!-- #masthead -->
+		
+		<div class="menu-toggle">
+			<a href="#">
+				<span class="menu-content">
+					<i class="fa fa-bars"></i>
+					<span class="menu">MENU</span>
+				</span>
+			</a>
+		</div>
 		
 		<div id="content" class="site-content">

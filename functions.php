@@ -47,37 +47,7 @@ function brettwysocki_setup() {
 	 * Switch default core markup for search form, comment form, and comments
 	 * to output valid HTML5.
 	 */
-	add_theme_support( 'html5', array(
-		'comment-form',
-		'comment-list',
-		'gallery',
-		'caption',
-	) );
-
-	/*
-	 * Enable support for Post Formats.
-	 *
-	 * See: https://codex.wordpress.org/Post_Formats
-	 */
-	add_theme_support( 'post-formats', array(
-		'aside',
-		'image',
-		'video',
-		'quote',
-		'link',
-		'gallery',
-		'audio',
-	) );
-
-	// Add theme support for Custom Logo.
-	add_theme_support( 'custom-logo', array(
-		'width'       => 250,
-		'height'      => 250,
-		'flex-width'  => true,
-	) );
-
-	// Add theme support for selective refresh for widgets.
-	add_theme_support( 'customize-selective-refresh-widgets' );
+	add_theme_support( 'html5', array( 'comment-form', 'comment-list', 'gallery', 'caption', ) );
 
 	/*
 	 * This theme styles the visual editor to resemble the theme style,
@@ -85,90 +55,6 @@ function brettwysocki_setup() {
  	 */
 	add_editor_style( array( 'assets/css/editor-style.css', brettwysocki_fonts_url() ) );
 
-	add_theme_support( 'starter-content', array(
-		'widgets' => array(
-			'sidebar-1' => array(
-				'text_business_info',
-				'search',
-				'text_about',
-			),
-
-			'sidebar-2' => array(
-				'text_business_info',
-			),
-
-			'sidebar-3' => array(
-				'text_about',
-				'search',
-			),
-		),
-
-		'posts' => array(
-			'home',
-			'about' => array(
-				'thumbnail' => '{{image-sandwich}}',
-			),
-			'contact' => array(
-				'thumbnail' => '{{image-espresso}}',
-			),
-			'blog' => array(
-				'thumbnail' => '{{image-coffee}}',
-			),
-			'homepage-section' => array(
-				'thumbnail' => '{{image-espresso}}',
-			),
-		),
-
-		'attachments' => array(
-			'image-espresso' => array(
-				'post_title' => _x( 'Espresso', 'Theme starter content', 'brettwysocki' ),
-				'file' => 'assets/images/espresso.jpg',
-			),
-			'image-sandwich' => array(
-				'post_title' => _x( 'Sandwich', 'Theme starter content', 'brettwysocki' ),
-				'file' => 'assets/images/sandwich.jpg',
-			),
-			'image-coffee' => array(
-				'post_title' => _x( 'Coffee', 'Theme starter content', 'brettwysocki' ),
-				'file' => 'assets/images/coffee.jpg',
-			),
-		),
-
-		'options' => array(
-			'show_on_front' => 'page',
-			'page_on_front' => '{{home}}',
-			'page_for_posts' => '{{blog}}',
-		),
-
-		'theme_mods' => array(
-			'panel_1' => '{{homepage-section}}',
-			'panel_2' => '{{about}}',
-			'panel_3' => '{{blog}}',
-			'panel_4' => '{{contact}}',
-		),
-
-		'nav_menus' => array(
-			'top' => array(
-				'name' => __( 'Top Menu', 'brettwysocki' ),
-				'items' => array(
-					'page_home',
-					'page_about',
-					'page_blog',
-					'page_contact',
-				),
-			),
-			'social' => array(
-				'name' => __( 'Social Links Menu', 'brettwysocki' ),
-				'items' => array(
-					'link_yelp',
-					'link_facebook',
-					'link_twitter',
-					'link_instagram',
-					'link_email',
-				),
-			),
-		),
-	) );
 }
 add_action( 'after_setup_theme', 'brettwysocki_setup' );
 
@@ -212,44 +98,6 @@ function brettwysocki_resource_hints( $urls, $relation_type ) {
 	return $urls;
 }
 add_filter( 'wp_resource_hints', 'brettwysocki_resource_hints', 10, 2 );
-
-/**
- * Register widget area.
- *
- * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
- */
-/*function brettwysocki_widgets_init() {
-	register_sidebar( array(
-		'name'          => __( 'Sidebar', 'brettwysocki' ),
-		'id'            => 'sidebar-1',
-		'description'   => __( 'Add widgets here to appear in your sidebar.', 'brettwysocki' ),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
-	) );
-
-	register_sidebar( array(
-		'name'          => __( 'Footer 1', 'brettwysocki' ),
-		'id'            => 'sidebar-2',
-		'description'   => __( 'Add widgets here to appear in your footer.', 'brettwysocki' ),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
-	) );
-
-	register_sidebar( array(
-		'name'          => __( 'Footer 2', 'brettwysocki' ),
-		'id'            => 'sidebar-3',
-		'description'   => __( 'Add widgets here to appear in your footer.', 'brettwysocki' ),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
-	) );
-}
-add_action( 'widgets_init', 'brettwysocki_widgets_init' );*/
 
 /**
  * Replaces "[...]" (appended to automatically generated excerpts) with ... and
@@ -296,50 +144,31 @@ function brettwysocki_pingback_header() {
 add_action( 'wp_head', 'brettwysocki_pingback_header' );
 
 /**
- * Display custom color CSS.
- */
-function brettwysocki_colors_css_wrap() {
-	if ( 'custom' !== get_theme_mod( 'colorscheme' ) && ! is_customize_preview() ) {
-		return;
-	}
-
-	require_once( get_parent_theme_file_path( '/inc/color-patterns.php' ) );
-	$hue = absint( get_theme_mod( 'colorscheme_hue', 250 ) );
-?>
-	<style type="text/css" id="custom-theme-colors" <?php if ( is_customize_preview() ) { echo 'data-hue="' . $hue . '"'; } ?>>
-		<?php echo brettwysocki_custom_colors_css(); ?>
-	</style>
-<?php }
-add_action( 'wp_head', 'brettwysocki_colors_css_wrap' );
-
-/**
  * Enqueue scripts and styles.
  */
 function brettwysocki_scripts() {
+	
 	// Sometimes you need to be fancy.
 	wp_enqueue_style( 'brettwysocki-fonts', brettwysocki_fonts_url(), array(), null );
 
-	wp_enqueue_script( 'fontawesome-base', get_bloginfo('template_directory') . '/assets/js/fontawesome.js', array(), '5.0.0-alpha4' );
+	wp_enqueue_script( 'fontawesome-base', get_bloginfo('template_directory') . '/assets/js/fontawesome.min.js', array(), '5.0.0-beta6' );
 
-	wp_enqueue_script( 'fontawesome-solid', get_bloginfo('template_directory') . '/assets/js/packs/solid.js', array('fontawesome-base'), '5.0.0-alpha4' );
+	wp_enqueue_script( 'fontawesome-solid', get_bloginfo('template_directory') . '/assets/js/packs/solid.min.js', array('fontawesome-base'), '5.0.0-beta6' );
 
 	// Gotta have style.
 	wp_enqueue_style( 'brettwysocki-style', get_stylesheet_uri(), array(),  filemtime( get_stylesheet_directory() . '/style.css' ) );
 
 	// Load the dark colorscheme.
-	if ( 'dark' === get_theme_mod( 'colorscheme', 'light' ) || is_customize_preview() ) {
+	/*if ( 'dark' === get_theme_mod( 'colorscheme', 'light' ) || is_customize_preview() ) {
 		wp_enqueue_style( 'brettwysocki-colors-dark', get_theme_file_uri( '/assets/css/colors-dark.css' ), array( 'brettwysocki-style' ), '1.0' );
-	}
-
-	//wp_enqueue_script( 'brettwysocki-global', get_theme_file_uri( '/assets/js/global.js' ), array( 'jquery' ), '1.0', true );
-
-	//wp_enqueue_script( 'jquery-scrollto', get_theme_file_uri( '/assets/js/jquery.scrollTo.js' ), array( 'jquery' ), '2.1.2', true );
+	}*/
 
 	wp_localize_script( 'brettwysocki-skip-link-focus-fix', 'brettwysockiScreenReaderText', $brettwysocki_l10n );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
+
 }
 add_action( 'wp_enqueue_scripts', 'brettwysocki_scripts' );
 
@@ -352,7 +181,9 @@ function brettwysocki_add_defer_attribute($tag, $handle) {
          return str_replace(' src', ' defer="defer" src', $tag);
       }
    }
+
    return $tag;
+
 }
 
 add_filter('script_loader_tag', 'brettwysocki_add_defer_attribute', 10, 2);
@@ -407,4 +238,114 @@ function brettwysocki_post_thumbnail_sizes_attr( $attr, $attachment, $size ) {
 }
 add_filter( 'wp_get_attachment_image_attributes', 'brettwysocki_post_thumbnail_sizes_attr', 10, 3 );
 
+
+/**
+ * My Custom Post Type & Taxonomy Labels
+ * 
+ * @since Brett_Wysocki 1.0
+ * @param string $singular Singular label name
+ * @param string $pluarl Plural label name or false if it's just singular with an s
+ * @param string $type either Custom Post Type (cpt) or taxonomy
+ * @return array $labels Label array
+ */
+function brettwysocki_get_labels( $singular, $plural = false, $type = 'cpt' ) {
+
+	$labels = array();
+
+	if ( !$plural ) {
+		$plural = $singular . 's';
+	}
+
+	if ( $type == 'cpt' ) {
+
+		$labels = array(
+			'name'               => __( $plural ),
+			'singular_name'      => __( $singular ),
+			'menu_name'          => __( $plural ),
+			'name_admin_bar'     => __( $singular ),
+			'add_new'            => __( 'Add New' ),
+			'add_new_item'       => __( 'Add New ' . $singular ),
+			'new_item'           => __( 'New ' . $singular ),
+			'edit_item'          => __( 'Edit ' . $singular ),
+			'view_item'          => __( 'View ' . $singular ),
+			'all_items'          => __( 'All ' . $plural ),
+			'search_items'       => __( 'Search ' . $plural ),
+			'parent_item_colon'  => __( 'Parent ' . $plural . ':' ),
+			'not_found'          => __( 'No ' . strtolower( $plural ) . ' found.' ),
+			'not_found_in_trash' => __( 'No ' . strtolower( $plural ) . ' found in Trash.' )
+		);
+
+	} else if ( $type == 'taxonomy' ) {
+
+		$labels = array(
+			'name'                       => _x( $plural, 'taxonomy general name' ),
+			'singular_name'              => _x( $singular, 'taxonomy singular name' ),
+			'search_items'               => __( 'Search ' . $plural ),
+			'popular_items'              => __( 'Popular ' . $plural ),
+			'all_items'                  => __( 'All ' . $plural ),
+			'parent_item'                => null,
+			'parent_item_colon'          => null,
+			'edit_item'                  => __( 'Edit ' . $singular ),
+			'update_item'                => __( 'Update ' . $singular ),
+			'add_new_item'               => __( 'Add New ' . $singular ),
+			'new_item_name'              => __( 'New ' . $singular . ' Name' ),
+			'separate_items_with_commas' => __( 'Separate ' . $plural . ' with commas' ),
+			'add_or_remove_items'        => __( 'Add or remove ' . $plural ),
+			'choose_from_most_used'      => __( 'Choose from the most used ' . $plural ),
+			'not_found'                  => __( 'No ' . $plural . ' found.' ),
+			'menu_name'                  => __( $plural ),
+		);
+	
+	}
+
+	return $labels;
+}
+
+/**
+ * My Custom Post Types
+ *
+ * Creates new custom post types
+ *
+ * @since Brett_Wysocki 1.0
+ * @return null
+ */
+function brettwysocki_custom_post_types() {
+
+		// Portfolio Item
+		register_post_type( 'portfolio-item',
+			array(
+				'labels' => brettwysocki_get_labels( 'Portfolio Item' ),
+				'public' => true,
+				'supports' => array( 'title' ),
+				'menu_icon' => 'dashicons-location',
+			)
+		);
+
+}
+add_action( 'init', 'brettwysocki_custom_post_types' ); // Uncomment to enable custom post type creation.
+
+/**
+ * My Custom Taxonomies
+ * 
+ * Creates new taxonomies
+ * 
+ * @since Brett_Wysocki 1.0
+ * @return null
+ */
+function brettwysocki_custom_taxonomies() {
+
+	$args = array(
+		'labels'            => brettwysocki_get_labels( 'Portfolio Category', 'Portfolio Categories', 'taxonomy' ),
+		'hierarchical'      => true,
+		'show_ui'           => true,
+		'show_admin_column' => true,
+		'query_var'         => true,
+		'meta_box_cb'		=> false,
+		'rewrite'           => array( 'slug' => 'portfolio-category' ),
+	);
+
+	register_taxonomy( 'portfolio-category', array( 'portfolio-item' ), $args );
+
+}
+add_action( 'init', 'brettwysocki_custom_taxonomies' ); // Uncomment to enable custom taxonomy creation. 
 ?>

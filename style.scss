@@ -6,42 +6,81 @@
  *
  */
 
- @import 'assets/scss/reset';
+@import 'assets/scss/reset';
 
-html {
-	font-family: 'Signika';
-	font-size: 62.5%;
-}
-body {
-	font-size: 18px;
-}
-.site {
-	position: relative;
-}
+@import 'assets/scss/bourbon/bourbon';
 
-a {
-	color: darkred;
-	text-decoration: none;
-	&:hover {
-		color: darken( darkred, 10% );
+	html {
+		font-family: 'Signika';
+		font-size: 62.5%;
 	}
-}
+	body {
+		font-size: 18px;
+	}
+	.site {
+		position: relative;
+	}
 
- .site-branding {
- 	position: absolute;
- 	top: 0;
- 	left: 0;
- 	.logo {
- 		.light {
-			font-weight: 300;
- 		}
- 		.heavy {
- 			font-weight: 700;
- 		}
- 	}
- }
+	a {
+		color: darkred;
+		text-decoration: none;
+		&:hover {
+			color: darken( darkred, 10% );
+		}
+	}
 
- .wrap {
- 	max-width: 1200px;
- 	margin: 0 auto;
- }
+	.site-branding {
+		position: absolute;
+		top: 0;
+		left: 0;
+		.logo {
+			.light {
+				font-weight: 300;
+			}
+			.heavy {
+				font-weight: 700;
+			}
+		}
+	}
+
+	.site-content {
+		position: relative;
+	}
+	.inner {
+		position: relative;
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	.menu-toggle {
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+			a {
+			display: block;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			right: 0;
+			width: 64px;
+			background-color: darkred;
+			color: white;
+			font-size: rem( 64 );
+			line-height: rem( 24 );
+			text-align: center;
+			padding: 0 5px;
+			box-sizing: border-box;
+			.menu-content {
+				display: block;
+				position: relative;
+				top: 50%;
+				left: 50%;
+				@include transform( translate( -50%, -50% ) );
+				.menu {
+					font-size: rem( 24 );
+				}
+			}
+		}
+
+	}
